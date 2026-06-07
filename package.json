@@ -1,0 +1,29 @@
+{
+  "name": "@kloak.id/web",
+  "version": "0.1.0",
+  "description": "Kloak.id browser SDK — auth flows, token storage, and session management for Vanilla JS / Vue / Angular",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "dev": "tsc --project tsconfig.json --watch",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "test": "node --experimental-vm-modules $(which jest) --passWithNoTests",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  },
+  "keywords": ["kloak", "auth", "browser", "sdk", "vanilla-js"],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "*",
+    "@types/node": "*"
+  }
+}

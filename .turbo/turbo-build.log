@@ -1,0 +1,4 @@
+
+> @kloak.id/web@0.1.0 build /Users/wayne/workspace/kloak/SDKs/frontend/packages/web
+> tsc --project tsconfig.json
+
