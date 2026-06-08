@@ -31,6 +31,11 @@ export interface KloakClientConfig {
    * - 'localStorage' — persists across sessions, use with caution
    */
   storage?: StorageBackend;
+  /**
+   * Set to true if baseUrl points to a custom domain (e.g. auth.acme.com)
+   * instead of the generic platform domain. This alters SDK path generation.
+   */
+  useCustomDomain?: boolean;
 }
 
 export class KloakClient {
@@ -49,14 +54,14 @@ export class KloakClient {
     this.tokenStore = new TokenStore(config.storage ?? 'memory');
     this.authState = new AuthStateManager();
 
-    const http = new HttpClient(baseUrl, config.tenantId, () =>
+    const http = new HttpClient(baseUrl, config.tenantId, !!config.useCustomDomain, () =>
       this.tokenStore.getAccessToken(),
     );
 
     this.emailPassword = new EmailPasswordAuth(http, this.tokenStore, this.authState);
     this.passwordless = new PasswordlessAuth(http, this.tokenStore, this.authState);
     this.passkeys = new PasskeyAuth(http, this.tokenStore, this.authState);
-    this.social = new SocialAuth(baseUrl, config.tenantId);
+    this.social = new SocialAuth(baseUrl, config.tenantId, !!config.useCustomDomain);
     this.totp = new TotpAuth(http);
     this.sessions = new SessionManager(http, this.tokenStore, this.authState);
 

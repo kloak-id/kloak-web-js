@@ -20,7 +20,7 @@
     "clean": "rm -rf dist *.tsbuildinfo"
   },
   "keywords": ["kloak", "auth", "browser", "sdk", "vanilla-js"],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {},
   "devDependencies": {
     "typescript": "*",

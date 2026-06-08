@@ -11,13 +11,18 @@ export class KloakWebError extends Error {
 export class HttpClient {
     baseUrl;
     tenantId;
+    useCustomDomain;
     getAccessToken;
-    constructor(baseUrl, tenantId, getAccessToken) {
+    constructor(baseUrl, tenantId, useCustomDomain, getAccessToken) {
         this.baseUrl = baseUrl;
         this.tenantId = tenantId;
+        this.useCustomDomain = useCustomDomain;
         this.getAccessToken = getAccessToken;
     }
     tenantPath(path) {
+        if (this.useCustomDomain) {
+            return `${this.baseUrl}${path}`;
+        }
         return `${this.baseUrl}/t/${this.tenantId}${path}`;
     }
     async request(method, url, body, params) {

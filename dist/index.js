@@ -23,11 +23,11 @@ export class KloakClient {
         const baseUrl = config.baseUrl.replace(/\/$/, '');
         this.tokenStore = new TokenStore(config.storage ?? 'memory');
         this.authState = new AuthStateManager();
-        const http = new HttpClient(baseUrl, config.tenantId, () => this.tokenStore.getAccessToken());
+        const http = new HttpClient(baseUrl, config.tenantId, !!config.useCustomDomain, () => this.tokenStore.getAccessToken());
         this.emailPassword = new EmailPasswordAuth(http, this.tokenStore, this.authState);
         this.passwordless = new PasswordlessAuth(http, this.tokenStore, this.authState);
         this.passkeys = new PasskeyAuth(http, this.tokenStore, this.authState);
-        this.social = new SocialAuth(baseUrl, config.tenantId);
+        this.social = new SocialAuth(baseUrl, config.tenantId, !!config.useCustomDomain);
         this.totp = new TotpAuth(http);
         this.sessions = new SessionManager(http, this.tokenStore, this.authState);
         if (!this.tokenStore.isExpired()) {

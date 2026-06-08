@@ -9,7 +9,9 @@ export interface SocialLoginOptions {
 export declare class SocialAuth {
     private baseUrl;
     private tenantId;
-    constructor(baseUrl: string, tenantId: string);
+    private useCustomDomain;
+    constructor(baseUrl: string, tenantId: string, useCustomDomain: boolean);
+    private tenantPath;
     /**
      * Redirects the browser to the provider's authorization page.
      * After the user authenticates, the provider redirects back to Kloak.id,

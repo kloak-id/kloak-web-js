@@ -49,5 +49,10 @@ export class EmailPasswordAuth {
             new_password: newPassword,
         });
     }
+    async verifyEmail(token) {
+        return this.http.post('/auth/email/verify', {
+            token,
+        });
+    }
 }
 //# sourceMappingURL=email-password.js.map

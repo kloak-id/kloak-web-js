@@ -7,8 +7,9 @@ export declare class KloakWebError extends Error implements KloakError {
 export declare class HttpClient {
     private baseUrl;
     private tenantId;
+    private useCustomDomain;
     private getAccessToken;
-    constructor(baseUrl: string, tenantId: string, getAccessToken: () => string | null);
+    constructor(baseUrl: string, tenantId: string, useCustomDomain: boolean, getAccessToken: () => string | null);
     private tenantPath;
     private request;
     get<T>(path: string, params?: Record<string, string>): Promise<T>;

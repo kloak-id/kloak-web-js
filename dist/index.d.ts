@@ -26,6 +26,11 @@ export interface KloakClientConfig {
      * - 'localStorage' — persists across sessions, use with caution
      */
     storage?: StorageBackend;
+    /**
+     * Set to true if baseUrl points to a custom domain (e.g. auth.acme.com)
+     * instead of the generic platform domain. This alters SDK path generation.
+     */
+    useCustomDomain?: boolean;
 }
 export declare class KloakClient {
     readonly config: KloakClientConfig;

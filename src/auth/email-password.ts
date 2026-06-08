@@ -89,4 +89,10 @@ export class EmailPasswordAuth {
       new_password: newPassword,
     });
   }
+
+  async verifyEmail(token: string): Promise<{ status: string; email: string }> {
+    return this.http.post<{ status: string; email: string }>('/auth/email/verify', {
+      token,
+    });
+  }
 }

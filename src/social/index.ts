@@ -20,7 +20,15 @@ export class SocialAuth {
   constructor(
     private baseUrl: string,
     private tenantId: string,
+    private useCustomDomain: boolean,
   ) {}
+
+  private tenantPath(path: string) {
+    if (this.useCustomDomain) {
+      return `${this.baseUrl}${path}`;
+    }
+    return `${this.baseUrl}/t/${this.tenantId}${path}`;
+  }
 
   /**
    * Redirects the browser to the provider's authorization page.
@@ -29,7 +37,7 @@ export class SocialAuth {
    */
   redirectToProvider(opts: SocialLoginOptions): void {
     const url = new URL(
-      `${this.baseUrl}/t/${this.tenantId}/oauth2/social/${opts.provider}`,
+      this.tenantPath(`/oauth2/social/${opts.provider}`)
     );
     if (opts.loginKey) url.searchParams.set('login_key', opts.loginKey);
     if (opts.redirectTo) url.searchParams.set('redirect_to', opts.redirectTo);
@@ -41,6 +49,6 @@ export class SocialAuth {
    * Register this with your social provider's OAuth2 app.
    */
   getCallbackUrl(provider: SocialProvider): string {
-    return `${this.baseUrl}/t/${this.tenantId}/oauth2/social/${provider}/callback`;
+    return this.tenantPath(`/oauth2/social/${provider}/callback`);
   }
 }

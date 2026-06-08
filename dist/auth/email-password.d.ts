@@ -27,5 +27,9 @@ export declare class EmailPasswordAuth {
     signIn(opts: SignInOptions): Promise<SignInResult>;
     requestPasswordReset(email: string): Promise<void>;
     resetPassword(token: string, newPassword: string): Promise<void>;
+    verifyEmail(token: string): Promise<{
+        status: string;
+        email: string;
+    }>;
 }
 //# sourceMappingURL=email-password.d.ts.map

@@ -16,10 +16,14 @@ export class HttpClient {
   constructor(
     private baseUrl: string,
     private tenantId: string,
+    private useCustomDomain: boolean,
     private getAccessToken: () => string | null,
   ) {}
 
   private tenantPath(path: string) {
+    if (this.useCustomDomain) {
+      return `${this.baseUrl}${path}`;
+    }
     return `${this.baseUrl}/t/${this.tenantId}${path}`;
   }
 
